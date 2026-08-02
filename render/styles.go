@@ -35,6 +35,15 @@ type Styles struct {
 	Button lipgloss.Style
 	// ButtonFocused renders the focused button's label.
 	ButtonFocused lipgloss.Style
+
+	// MarkdownRenderer, when non-nil, renders the text of a body-variant
+	// (or unstyled) Text component as Markdown before wrapping. The host
+	// injects its configured renderer (e.g. glamour) so a2tea stays free
+	// of markdown dependencies. Heading and caption variants are NOT
+	// passed through this renderer — they are short labels that the
+	// variant styles already handle. When nil, text renders as-is
+	// (backward compatible).
+	MarkdownRenderer func(text string, width int) string
 }
 
 // DefaultStyles returns the monochrome style set used when no host palette is
