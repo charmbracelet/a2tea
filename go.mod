@@ -3,7 +3,7 @@ module github.com/joestump-agent/a2tea
 go 1.26.3
 
 require (
-	charm.land/bubbletea/v2 v2.0.9
+	charm.land/bubbletea/v2 v2.0.10
 	charm.land/lipgloss/v2 v2.0.6
 	github.com/charmbracelet/x/ansi v0.11.8
 	github.com/tmc/a2ui v0.0.0-20260605070129-b42a8925e473
