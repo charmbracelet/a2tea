@@ -5,7 +5,7 @@ name: Deploy docs
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/markdown-text-rendering]
     paths:
       - 'website/**'
       - '.github/workflows/deploy-docs.yml'

@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/markdown-text-rendering]
   pull_request:
 
 permissions:
