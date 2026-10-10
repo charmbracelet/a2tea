@@ -5,7 +5,7 @@ name: Deploy docs
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/markdown-text-rendering]
     paths:
       - 'website/**'
       - '.github/workflows/deploy-docs.yml'
@@ -56,6 +56,9 @@ jobs:
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
+        # Pages artifact upload talks to GitHub's artifact API (v4), which
+        # the Gitea runner rejects (GHESNotSupportedError), so run there only.
+        if: github.server_url == 'https://github.com'
         with:
           path: website/build
 
@@ -63,7 +66,11 @@ jobs:
     name: Deploy
     needs: build
     # PRs only build; deployment happens on push to main (and manual runs).
-    if: github.event_name != 'pull_request'
+    # deploy-pages needs GitHub's API, so the whole job is GitHub-only;
+    # on the Gitea runner the build alone is the check.
+    if: >-
+      github.event_name != 'pull_request' &&
+      github.server_url == 'https://github.com'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
